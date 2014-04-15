@@ -1,0 +1,65 @@
+<% unless params[:date].nil? %>
+	<%= form_tag('/home/submit', :remote => :true) do %>
+		<div id="container_student_list">
+			<div>
+				<table class="table table-striped table-bordered">
+					<thead>
+				    <tr>
+				      <th>Name</th>
+				      <th>Email</th>
+				      <th>Attendence</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+							<%= hidden_field_tag 'start_time', @start_time %>
+							<%= hidden_field_tag 'end_time', @end_time %>
+							<%= hidden_field_tag 'course_id', params[:course_select]%>
+							<% @students.each do |stu| %>
+								<tr>
+									<td>
+										<%= stu.name %> 
+									</td>
+									<td>
+										<%= stu.email %> 
+									</td>
+									<td>
+										<%= radio_button_tag stu.id, "Yes"%> Present <%= radio_button_tag stu.id, "No" , true %> Absent
+									</td>
+								</tr>
+							<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<%= submit_tag "Submit Attendence", :class => "btn" %>
+	<% end %>
+<% else %>
+	<div id="container_student_list1">
+		<div>
+			<table class="table table-striped table-bordered">
+				<thead>
+			    <tr>
+			      <th>Name</th>
+			      <th>Email</th>
+			      <th>Attendence</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+						<% @students.each do |stu| %>
+							<tr style="color: <%= get_color_percentage stu.attendence params[:course_select] %>;">
+								<td>
+									<%=link_to stu.name, {:action => "all_attendence", :student_course_id => stu.student_courses.where(:courses_id => params[:course_select]).first.id} %> 
+								</td>
+								<td>
+									<%= stu.email %> 
+								</td>
+								<td>
+									<%= stu.attendence params[:course_select] %> %
+								</td>
+							</tr>
+						<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% end %>

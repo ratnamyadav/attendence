@@ -1,0 +1,36 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= jquery-ui
+ *= require_tree .
+ */
+.form_container{
+	float: right;
+	width: 120px;
+	margin-top: 5px;
+	margin-right: 19%;
+}
+h2{
+	font-size: 42px;
+	color: white;
+	font-family: 'Cabin', sans-serif;
+	font-weight: 300;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+.label_for{
+	width: 120px;
+	display: inline;
+	float: left;
+}
+ul{
+	list-style: none;
+}

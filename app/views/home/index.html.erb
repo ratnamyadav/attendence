@@ -1,0 +1,5 @@
+<% if current_user.nil? %>
+  <%= render :partial => "index" %>
+<% else %>
+  <%= render :partial => "dashboard" %>
+<% end %>

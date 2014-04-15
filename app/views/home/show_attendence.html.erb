@@ -1,0 +1,7 @@
+<div>
+	Select a Course: <%= select_tag 'course_select', options_for_select(@courses.collect{ |c| [c.name,c.id] }.insert(0, ["", 0]) ), :onclick => "remove_select_error();", :data => { :remote => true, :url => url_for(:action => :get_students)} %>
+</div>
+
+<div id="student_list">
+	
+</div>

@@ -1,0 +1,35 @@
+<h3><%= @stu_course.student.name %></h3>
+Select Student: <%= select_tag 'student_course_id', options_for_select(@stu_course.course.students.collect{ |c| [c.name,c.student_courses.where(:courses_id => @stu_course.course.id).first.id] }.insert(0, ["", 0]) ), :onclick => "remove_select_error();", :data => {:remote => true, :url => url_for(:action => :all_attendence)} %>
+<%= link_to "Back",{:action => "show_attendence"} ,:class => "btn"%>
+<div id="container_student_attendence">
+	<div>
+		<table class="table table-striped table-bordered">
+			<thead>
+		    <tr>
+		      <th>Present</th>
+		      <th>Date</th>
+		      <th>Start time</th>
+		      <th>End time</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @stu_course.student_attendences.each do |att| %>
+		  		<tr style="color: <%= get_color_attendence att.present %>;">
+						<td>
+							<%= att.present %> 
+						</td>
+						<td>
+							<%= att.date %> 
+						</td>
+						<td>
+							<%= att.start_time %> 
+						</td>
+						<td>
+							<%= att.end_time %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+<% unless @students.nil? %>
+	$("#student_list").html('<%= escape_javascript(render :partial => "student_list" )%>');
+<% else %>
+	$("#student_list").html('Already inserted the record for the classes :(');
+<% end %>

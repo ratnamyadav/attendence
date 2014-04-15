@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendence</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <%= link_to "Attendence", root_url , :class => "brand"%>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="<%= 'active' if current_page?(root_url) %>">
+            <% if user_signed_in? %>
+              <%= link_to "Dashboard", root_url %>
+            <% else %>
+              <%= link_to "Home", root_url %>
+            <% end %>
+          </li>
+          <% if user_signed_in? %>  
+            <li>
+              <%= render :partial => "widgets/header"%>
+            </li>
+          <%end%>
+          <li><%= link_to "Features" %></li>
+          <li><%= link_to "Contact Us" %></li>
+          <li><%= link_to "About Us" %></li>
+          
+            <% if user_signed_in? %>
+              <li><%= link_to "Sign out", destroy_user_session_path %></li>
+            <% elsif !current_page?('/') %>
+              <li class="<%= 'active' if current_page?('/users/sign_in') %>"><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="user_nav">
+    
+  </div>
+  <div class="row">
+    <div class="span7">
+      <%= yield %>
+    </div>
+    <% unless user_signed_in? %>
+      <div class="">
+        <%= render :partial => "widgets/sigin_form" %>
+      </div>
+      <% end %>
+  </div>
+</div>
+</body>
+</html>

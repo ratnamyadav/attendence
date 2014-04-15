@@ -1,0 +1,6 @@
+<li class="<%= 'active' if current_page?('/home/attendence') %>">
+	<%= link_to "New Sheet" , :action => :attendence %>
+</li>
+<li class="<%= 'active' if current_page?('/home/show_attendence') %>">
+	<%= link_to "Show Attendence" , :action => :show_attendence %>
+</li>

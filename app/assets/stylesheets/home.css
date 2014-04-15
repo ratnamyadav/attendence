@@ -1,0 +1,24 @@
+#container_student_list{
+	overflow-y: auto;
+	max-height: 230px;
+}
+#container_student_list1{
+	overflow-y: auto;
+	max-height: 500px;
+}
+#container_student_attendence{
+	overflow-y: auto;
+	max-height: 1230px;
+}
+.btn{
+	margin: 10px;
+}
+label{
+	float: left;
+}
+input[type="number"] .first{
+	float: left;	
+}
+input[type="number"]{
+	width: 30px;
+}

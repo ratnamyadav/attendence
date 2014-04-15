@@ -1,0 +1,70 @@
+<script>
+$(function() {
+$( "#date" ).datepicker({
+	dateFormat: 'yy-mm-dd'
+});
+});
+function check_fields(){
+	if($("#course_select :selected").val() == 0){
+		$("#error_select").text("Please Choose a Course");
+		return false;
+	}
+	return true;
+}
+function remove_select_error(){
+	if($("#course_select :selected").val() != 0)
+		$("#error_select").text("");
+}
+/*$( "select" ).click(function () {
+    //var str = "";
+    //$( "select option:selected" ).each(function() {
+     // str += $( this ).text() + " ";
+    //});
+    //$( "#student_list" ).text( str );
+    alert();
+  })*/
+</script>
+<div>
+	<h2>Enter Attendence</h2>
+	<ul>
+		<%= form_tag('/home/get_students', :remote => :true) do %>
+		<li>
+			<label for="course_select" class="label_for">Select course: </label>
+			<%= select_tag 'course_select', options_for_select(@courses.collect{ |c| [c.name,c.id] }.insert(0, ["", 0]) ), :onclick => "remove_select_error();"%><span id="error_select"></span><%#, :data => { :remote => true, :url => url_for(:action => :get_students)} %>
+		</li>
+		<li>
+			<label for="date" class="label_for">Select Date: </label>
+			<%= text_field_tag "date",Time.now.to_date, :readonly => true %>
+		</li>
+		<li>
+			<label for="start_hour" class="label_for">Start Time: </label>
+			<%= number_field_tag "start_hour", "00", :min => "00", :max => "23", :class => "first"  %>
+			<%= number_field_tag "start_minutes", "00", :min => "00", :max => "59"  %>
+		</li>
+		<li>
+			<label for="end_hour" class="label_for">End Time: </label>
+			<%= number_field_tag "end_hour", "00", :min => "00", :max => "23", :class => "first"  %>
+			<%= number_field_tag "end_minutes", "00", :min => "00", :max => "59"  %>
+		</li>
+<!--
+		<li>
+			<span>Select Start Time: </span>
+			<%= select_tag "start_time_hour", options_for_select((1..23).collect{|c| [c,c]}) %>
+			<%= select_tag "start_time_minutes", options_for_select((0..59).collect{|c| [c,c]}) %>
+		</li>
+		<li>
+			<span>Select End Time: </span>
+			<%= select_tag "end_time_hour", options_for_select((1..23).collect{|c| [c,c]}) %>
+			<%= select_tag "end_time_minutes", options_for_select((0..59).collect{|c| [c,c]}) %>
+		</li>
+-->
+		<li>
+			<%= submit_tag "Get Students" , :class => 'btn', :onclick => "return check_fields()"%>
+		</li>
+		<% end %>
+	<ul>
+</div>
+
+<div id="student_list">
+	
+</div>
